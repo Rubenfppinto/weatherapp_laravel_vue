@@ -6,26 +6,43 @@
 
         <div class="current-weather">
           <div class="grid grid-cols-1">
-            <p class="font-extrabold">{{ location.name }}, {{ location.country}}</p>
+            <p class="font-extrabold text-2xl text-center">{{ location.name }}, {{ location.country}}</p>
           </div>
-          <div class="grid grid-cols-3">
+          <div class="grid grid-cols-2">
             <div>
-              <p>{{ currentWeather.actual_temp }}°C</p>
-              <p>{{ currentWeather.temp_min }}°C</p>
-              <p>{{ currentWeather.temp_max }}°C</p>
+              <p class="font-medium text-xl">{{ currentWeather.actual_temp }}°C</p>
+            </div>
+            <div>
+              <img :src="'http://openweathermap.org/img/wn/' + currentWeather.icon + '@2x.png'" alt="">
+            </div>
+          </div>
+          <div class="grid grid-cols-2">
+            <div>
+              <p class="text-sm">
+                <span class="font-extrabold">Max:</span> {{ currentWeather.temp_min }}°C
+              </p>
+              <p class="text-sm">
+                <span class="font-extrabold">Max:</span>  {{ currentWeather.temp_max }}°C
+              </p>
             </div>
             <div>
               <p>Feels Like {{ currentWeather.feels_like }} °C</p>
               <p>{{ currentWeather.description }}</p>
             </div>
-            <img :src="'http://openweathermap.org/img/wn/' + currentWeather.icon + '@2x.png'" alt="">
           </div>
-          <div class="grid grid-cols-3">
+          <div class="grid grid-cols-3 p-6">
             <div>
-              <p>Pressure: {{ currentWeather.pressure }} hPa</p>
+              <p class="font-medium">Pressure: </p>
+              <p>{{ currentWeather.pressure }} hPa</p>
             </div>
-            <p>Humidity: {{ currentWeather.humidity }}%</p>
-            <p>Wind: {{ currentWeather.wind_speed }}mps</p>
+            <div>
+              <p class="font-medium">Humidity: </p>
+              <p>{{ currentWeather.humidity }}%</p>
+            </div>
+            <div>
+              <p class="font-medium">Wind: </p>
+              <p>{{ currentWeather.wind_speed }}mps</p>
+            </div>
           </div>
         </div>
     </div>

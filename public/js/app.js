@@ -1941,6 +1941,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.fetchData();
@@ -37583,20 +37600,46 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "current-weather" }, [
       _c("div", { staticClass: "grid grid-cols-1" }, [
-        _c("p", { staticClass: "font-extrabold" }, [
+        _c("p", { staticClass: "font-extrabold text-2xl text-center" }, [
           _vm._v(
             _vm._s(_vm.location.name) + ", " + _vm._s(_vm.location.country)
           )
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "grid grid-cols-3" }, [
+      _c("div", { staticClass: "grid grid-cols-2" }, [
         _c("div", [
-          _c("p", [_vm._v(_vm._s(_vm.currentWeather.actual_temp) + "°C")]),
+          _c("p", { staticClass: "font-medium text-xl" }, [
+            _vm._v(_vm._s(_vm.currentWeather.actual_temp) + "°C")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("img", {
+            attrs: {
+              src:
+                "http://openweathermap.org/img/wn/" +
+                _vm.currentWeather.icon +
+                "@2x.png",
+              alt: ""
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "grid grid-cols-2" }, [
+        _c("div", [
+          _c("p", { staticClass: "text-sm" }, [
+            _c("span", { staticClass: "font-extrabold" }, [_vm._v("Max:")]),
+            _vm._v(" " + _vm._s(_vm.currentWeather.temp_min) + "°C\n          ")
+          ]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm.currentWeather.temp_min) + "°C")]),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm.currentWeather.temp_max) + "°C")])
+          _c("p", { staticClass: "text-sm" }, [
+            _c("span", { staticClass: "font-extrabold" }, [_vm._v("Max:")]),
+            _vm._v(
+              "  " + _vm._s(_vm.currentWeather.temp_max) + "°C\n          "
+            )
+          ])
         ]),
         _vm._v(" "),
         _c("div", [
@@ -37607,32 +37650,26 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.currentWeather.description))])
-        ]),
-        _vm._v(" "),
-        _c("img", {
-          attrs: {
-            src:
-              "http://openweathermap.org/img/wn/" +
-              _vm.currentWeather.icon +
-              "@2x.png",
-            alt: ""
-          }
-        })
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "grid grid-cols-3" }, [
+      _c("div", { staticClass: "grid grid-cols-3 p-6" }, [
         _c("div", [
-          _c("p", [
-            _vm._v("Pressure: " + _vm._s(_vm.currentWeather.pressure) + " hPa")
-          ])
+          _c("p", { staticClass: "font-medium" }, [_vm._v("Pressure: ")]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.currentWeather.pressure) + " hPa")])
         ]),
         _vm._v(" "),
-        _c("p", [
-          _vm._v("Humidity: " + _vm._s(_vm.currentWeather.humidity) + "%")
+        _c("div", [
+          _c("p", { staticClass: "font-medium" }, [_vm._v("Humidity: ")]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.currentWeather.humidity) + "%")])
         ]),
         _vm._v(" "),
-        _c("p", [
-          _vm._v("Wind: " + _vm._s(_vm.currentWeather.wind_speed) + "mps")
+        _c("div", [
+          _c("p", { staticClass: "font-medium" }, [_vm._v("Wind: ")]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.currentWeather.wind_speed) + "mps")])
         ])
       ])
     ])
