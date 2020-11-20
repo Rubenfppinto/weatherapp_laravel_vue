@@ -37598,8 +37598,8 @@ var render = function() {
   return _c("div", { staticClass: "text-white-mb-8" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "current-weather" }, [
-      _c("div", { staticClass: "grid grid-cols-1" }, [
+    _c("div", { staticClass: "current-weather border border-2 mt-5" }, [
+      _c("div", { staticClass: "grid grid-cols-1 bg-gray-500 py-3" }, [
         _c("p", { staticClass: "font-extrabold text-2xl text-center" }, [
           _vm._v(
             _vm._s(_vm.location.name) + ", " + _vm._s(_vm.location.country)

@@ -4,8 +4,8 @@
           <input type="text" class="w-full">
         </div>
 
-        <div class="current-weather">
-          <div class="grid grid-cols-1">
+        <div class="current-weather border border-2 mt-5">
+          <div class="grid grid-cols-1 bg-gray-500 py-3">
             <p class="font-extrabold text-2xl text-center">{{ location.name }}, {{ location.country}}</p>
           </div>
           <div class="grid grid-cols-2">
