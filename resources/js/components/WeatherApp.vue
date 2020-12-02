@@ -1,45 +1,48 @@
 <template>
-    <div class="text-white-mb-8">
+    <div class="text-white">
+        <div>
+          <p class="text-4xl text-center text-green-600 mb-5">Today's weather</p>
+        </div>
         <div class="places-input text-gray-800">
-          <input type="text" class="w-full">
+          <input type="text" class="rounded w-full">
         </div>
 
         <div class="current-weather border border-2 mt-5">
-          <div class="grid grid-cols-1 bg-gray-500 py-3">
+          <div class="grid grid-cols-1 bg-green-600 py-3 border-b border-white">
             <p class="font-extrabold text-2xl text-center">{{ location.name }}, {{ location.country}}</p>
           </div>
           <div class="grid grid-cols-2">
-            <div>
-              <p class="font-medium text-xl">{{ currentWeather.actual_temp }}°C</p>
+            <div class="flex items-center">
+              <p class="border-custom text-center font-medium text-4xl w-full">{{ currentWeather.actual_temp }} °C</p>
             </div>
-            <div>
+            <div class="mx-auto">
               <img :src="'http://openweathermap.org/img/wn/' + currentWeather.icon + '@2x.png'" alt="">
             </div>
           </div>
-          <div class="grid grid-cols-2">
+          <div class="grid grid-cols-2 text-center">
             <div>
               <p class="text-sm">
-                <span class="font-extrabold">Max:</span> {{ currentWeather.temp_min }}°C
+                <span class="font-bold">Max:</span> {{ currentWeather.temp_min }} °C
               </p>
               <p class="text-sm">
-                <span class="font-extrabold">Max:</span>  {{ currentWeather.temp_max }}°C
+                <span class="font-bold">Max:</span>  {{ currentWeather.temp_max }} °C
               </p>
             </div>
-            <div>
-              <p>Feels Like {{ currentWeather.feels_like }} °C</p>
+            <div class="text-center">
+              <p><span class="font-semibold">Feels Like: </span> {{ currentWeather.feels_like }} °C</p>
               <p>{{ currentWeather.description }}</p>
             </div>
           </div>
-          <div class="grid grid-cols-3 p-6">
-            <div>
+          <div class="grid grid-cols-3 p-6 text-center mt-6 border-t">
+            <div class="m-3">
               <p class="font-medium">Pressure: </p>
               <p>{{ currentWeather.pressure }} hPa</p>
             </div>
-            <div>
+            <div class="m-3">
               <p class="font-medium">Humidity: </p>
               <p>{{ currentWeather.humidity }}%</p>
             </div>
-            <div>
+            <div class="m-3">
               <p class="font-medium">Wind: </p>
               <p>{{ currentWeather.wind_speed }}mps</p>
             </div>
@@ -93,3 +96,14 @@
   }
 
 </script>
+
+<style scoped>
+  /* * {
+    border: 1px solid red;
+  }
+
+  .border-custom {
+    border: 1px solid green;
+    max-width: 100%;
+  } */
+</style>

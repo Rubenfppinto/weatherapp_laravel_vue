@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/app.js" defer></script>
 </head>
-<body class="bg-red-100">
+<body class="bg-gray-800">
     <div id="app" class="flex justify-center pt-16">
         <weather-app></weather-app>
     </div>
