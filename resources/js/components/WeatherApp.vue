@@ -4,12 +4,13 @@
           <p class="text-4xl text-center text-green-600 mb-5">Today's weather</p>
         </div>
         <div class="places-input text-gray-800">
-          <input type="text" class="rounded w-full">
+          <input type="search" id="address" class="form-control rounded w-full" placeholder="Where are we going?" />
+          <p class="text-white">Selected: <strong id="address-value">none</strong></p>
         </div>
 
-        <div class="current-weather border border-2 mt-5">
-          <div class="grid grid-cols-1 bg-green-600 py-3 border-b border-white">
-            <p class="font-extrabold text-2xl text-center">{{ location.name }}, {{ location.country}}</p>
+        <div class="current-weather border border-2 border-green-600 mt-5 rounded">
+          <div class="grid grid-cols-1 bg-green-600 py-3 border-b border-green-600">
+            <p class="font-extrabold text-2xl text-center">{{ location.city }}, {{ location.country}}</p>
           </div>
           <div class="grid grid-cols-2">
             <div class="flex items-center">
@@ -55,6 +56,38 @@
   export default {
     mounted() {
       this.fetchData()
+
+      var placesAutocomplete = places({
+          appId: 'plUAO09WY4WH',
+          apiKey: 'ddac726479828649356cb2312d526307',
+          container: document.querySelector('#address')
+      }).configure({
+        type: 'city',
+        aroundLatLngViaIP: false,
+      });
+
+      var $address = document.querySelector('#address-value')
+        placesAutocomplete.on('change', (e) => {
+        $address.textContent = e.suggestion.name + ', ' + e.suggestion.country
+
+        this.location.city = `${e.suggestion.name}`
+        this.location.country = `${e.suggestion.country}`
+      });
+
+      placesAutocomplete.on('clear', function() {
+        $address.textContent = 'none';
+
+      });
+    },
+    watch: {
+      location: {
+        handler(newValue, oldvalue){
+          this.fetchData()
+        },
+
+
+        deep: true
+      }
     },
     data(){
       return {
@@ -70,14 +103,14 @@
           wind_speed: ''
         },
         location: {
-          name: 'london',
+          city: 'London',
           country: 'GB',
         }
       }
     },
     methods: {
       fetchData() {
-        fetch(`/api/weather?city=${this.location.name}`)
+        fetch(`/api/weather?city=${this.location.city}`)
           .then(response => response.json())
           .then(data => {
             console.log(data)

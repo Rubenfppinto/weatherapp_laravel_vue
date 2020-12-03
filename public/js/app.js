@@ -1961,9 +1961,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    var _this = this;
+
     this.fetchData();
+    var placesAutocomplete = places({
+      appId: 'plUAO09WY4WH',
+      apiKey: 'ddac726479828649356cb2312d526307',
+      container: document.querySelector('#address')
+    }).configure({
+      type: 'city',
+      aroundLatLngViaIP: false
+    });
+    var $address = document.querySelector('#address-value');
+    placesAutocomplete.on('change', function (e) {
+      $address.textContent = e.suggestion.name + ', ' + e.suggestion.country;
+      _this.location.city = "".concat(e.suggestion.name);
+      _this.location.country = "".concat(e.suggestion.country);
+    });
+    placesAutocomplete.on('clear', function () {
+      $address.textContent = 'none';
+    });
+  },
+  watch: {
+    location: {
+      handler: function handler(newValue, oldvalue) {
+        this.fetchData();
+      },
+      deep: true
+    }
   },
   data: function data() {
     return {
@@ -1979,28 +2007,28 @@ __webpack_require__.r(__webpack_exports__);
         wind_speed: ''
       },
       location: {
-        name: 'london',
+        city: 'London',
         country: 'GB'
       }
     };
   },
   methods: {
     fetchData: function fetchData() {
-      var _this = this;
+      var _this2 = this;
 
-      fetch("/api/weather?city=".concat(this.location.name)).then(function (response) {
+      fetch("/api/weather?city=".concat(this.location.city)).then(function (response) {
         return response.json();
       }).then(function (data) {
         console.log(data);
-        _this.currentWeather.actual_temp = Math.round(data.main.temp);
-        _this.currentWeather.feels_like = Math.round(data.main.feels_like);
-        _this.currentWeather.description = data.weather[0].description;
-        _this.currentWeather.icon = data.weather[0].icon;
-        _this.currentWeather.temp_min = Math.round(data.main.temp_min);
-        _this.currentWeather.temp_max = Math.round(data.main.temp_max);
-        _this.currentWeather.pressure = data.main.pressure;
-        _this.currentWeather.humidity = data.main.humidity;
-        _this.currentWeather.wind_speed = data.wind.speed;
+        _this2.currentWeather.actual_temp = Math.round(data.main.temp);
+        _this2.currentWeather.feels_like = Math.round(data.main.feels_like);
+        _this2.currentWeather.description = data.weather[0].description;
+        _this2.currentWeather.icon = data.weather[0].icon;
+        _this2.currentWeather.temp_min = Math.round(data.main.temp_min);
+        _this2.currentWeather.temp_max = Math.round(data.main.temp_max);
+        _this2.currentWeather.pressure = data.main.pressure;
+        _this2.currentWeather.humidity = data.main.humidity;
+        _this2.currentWeather.wind_speed = data.wind.speed;
       });
     }
   }
@@ -38248,100 +38276,107 @@ var render = function() {
     _vm._v(" "),
     _vm._m(1),
     _vm._v(" "),
-    _c("div", { staticClass: "current-weather border border-2 mt-5" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "grid grid-cols-1 bg-green-600 py-3 border-b border-white"
-        },
-        [
-          _c("p", { staticClass: "font-extrabold text-2xl text-center" }, [
-            _vm._v(
-              _vm._s(_vm.location.name) + ", " + _vm._s(_vm.location.country)
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "grid grid-cols-2" }, [
-        _c("div", { staticClass: "flex items-center" }, [
-          _c(
-            "p",
-            {
-              staticClass:
-                "border-custom text-center font-medium text-4xl w-full"
-            },
-            [_vm._v(_vm._s(_vm.currentWeather.actual_temp) + " °C")]
-          )
-        ]),
+    _c(
+      "div",
+      {
+        staticClass:
+          "current-weather border border-2 border-green-600 mt-5 rounded"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "grid grid-cols-1 bg-green-600 py-3 border-b border-green-600"
+          },
+          [
+            _c("p", { staticClass: "font-extrabold text-2xl text-center" }, [
+              _vm._v(
+                _vm._s(_vm.location.city) + ", " + _vm._s(_vm.location.country)
+              )
+            ])
+          ]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "mx-auto" }, [
-          _c("img", {
-            attrs: {
-              src:
-                "http://openweathermap.org/img/wn/" +
-                _vm.currentWeather.icon +
-                "@2x.png",
-              alt: ""
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "grid grid-cols-2 text-center" }, [
-        _c("div", [
-          _c("p", { staticClass: "text-sm" }, [
-            _c("span", { staticClass: "font-bold" }, [_vm._v("Max:")]),
-            _vm._v(
-              " " + _vm._s(_vm.currentWeather.temp_min) + " °C\n          "
+        _c("div", { staticClass: "grid grid-cols-2" }, [
+          _c("div", { staticClass: "flex items-center" }, [
+            _c(
+              "p",
+              {
+                staticClass:
+                  "border-custom text-center font-medium text-4xl w-full"
+              },
+              [_vm._v(_vm._s(_vm.currentWeather.actual_temp) + " °C")]
             )
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "text-sm" }, [
-            _c("span", { staticClass: "font-bold" }, [_vm._v("Max:")]),
-            _vm._v(
-              "  " + _vm._s(_vm.currentWeather.temp_max) + " °C\n          "
-            )
+          _c("div", { staticClass: "mx-auto" }, [
+            _c("img", {
+              attrs: {
+                src:
+                  "http://openweathermap.org/img/wn/" +
+                  _vm.currentWeather.icon +
+                  "@2x.png",
+                alt: ""
+              }
+            })
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "text-center" }, [
-          _c("p", [
-            _c("span", { staticClass: "font-semibold" }, [
-              _vm._v("Feels Like: ")
+        _c("div", { staticClass: "grid grid-cols-2 text-center" }, [
+          _c("div", [
+            _c("p", { staticClass: "text-sm" }, [
+              _c("span", { staticClass: "font-bold" }, [_vm._v("Max:")]),
+              _vm._v(
+                " " + _vm._s(_vm.currentWeather.temp_min) + " °C\n          "
+              )
             ]),
-            _vm._v(" " + _vm._s(_vm.currentWeather.feels_like) + " °C")
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _c("span", { staticClass: "font-bold" }, [_vm._v("Max:")]),
+              _vm._v(
+                "  " + _vm._s(_vm.currentWeather.temp_max) + " °C\n          "
+              )
+            ])
           ]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm.currentWeather.description))])
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "grid grid-cols-3 p-6 text-center mt-6 border-t" },
-        [
-          _c("div", { staticClass: "m-3" }, [
-            _c("p", { staticClass: "font-medium" }, [_vm._v("Pressure: ")]),
+          _c("div", { staticClass: "text-center" }, [
+            _c("p", [
+              _c("span", { staticClass: "font-semibold" }, [
+                _vm._v("Feels Like: ")
+              ]),
+              _vm._v(" " + _vm._s(_vm.currentWeather.feels_like) + " °C")
+            ]),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.currentWeather.pressure) + " hPa")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "m-3" }, [
-            _c("p", { staticClass: "font-medium" }, [_vm._v("Humidity: ")]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.currentWeather.humidity) + "%")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "m-3" }, [
-            _c("p", { staticClass: "font-medium" }, [_vm._v("Wind: ")]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.currentWeather.wind_speed) + "mps")])
+            _c("p", [_vm._v(_vm._s(_vm.currentWeather.description))])
           ])
-        ]
-      )
-    ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "grid grid-cols-3 p-6 text-center mt-6 border-t" },
+          [
+            _c("div", { staticClass: "m-3" }, [
+              _c("p", { staticClass: "font-medium" }, [_vm._v("Pressure: ")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.currentWeather.pressure) + " hPa")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "m-3" }, [
+              _c("p", { staticClass: "font-medium" }, [_vm._v("Humidity: ")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.currentWeather.humidity) + "%")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "m-3" }, [
+              _c("p", { staticClass: "font-medium" }, [_vm._v("Wind: ")]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.currentWeather.wind_speed) + "mps")])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -38360,7 +38395,19 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "places-input text-gray-800" }, [
-      _c("input", { staticClass: "rounded w-full", attrs: { type: "text" } })
+      _c("input", {
+        staticClass: "form-control rounded w-full",
+        attrs: {
+          type: "search",
+          id: "address",
+          placeholder: "Where are we going?"
+        }
+      }),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-white" }, [
+        _vm._v("Selected: "),
+        _c("strong", { attrs: { id: "address-value" } }, [_vm._v("none")])
+      ])
     ])
   }
 ]
