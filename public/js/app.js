@@ -38278,10 +38278,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      {
-        staticClass:
-          "current-weather border border-2 border-green-600 mt-5 rounded"
-      },
+      { staticClass: "border border-2 border-green-600 mt-5 rounded" },
       [
         _c(
           "div",
@@ -38290,7 +38287,7 @@ var render = function() {
               "grid grid-cols-1 bg-green-600 py-3 border-b border-green-600"
           },
           [
-            _c("p", { staticClass: "font-extrabold text-2xl text-center" }, [
+            _c("p", { staticClass: "font-extrabold text-xl text-center" }, [
               _vm._v(
                 _vm._s(_vm.location.city) + ", " + _vm._s(_vm.location.country)
               )
@@ -38348,7 +38345,9 @@ var render = function() {
               _vm._v(" " + _vm._s(_vm.currentWeather.feels_like) + " °C")
             ]),
             _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(_vm.currentWeather.description))])
+            _c("p", { staticClass: "capitalize" }, [
+              _vm._v(_vm._s(_vm.currentWeather.description))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -38400,7 +38399,7 @@ var staticRenderFns = [
         attrs: {
           type: "search",
           id: "address",
-          placeholder: "Where are we going?"
+          placeholder: "Type the location..."
         }
       }),
       _vm._v(" "),

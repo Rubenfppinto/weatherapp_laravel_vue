@@ -4,13 +4,13 @@
           <p class="text-4xl text-center text-green-600 mb-5">Today's weather</p>
         </div>
         <div class="places-input text-gray-800">
-          <input type="search" id="address" class="form-control rounded w-full" placeholder="Where are we going?" />
+          <input type="search" id="address" class="form-control rounded w-full" placeholder="Type the location..." />
           <p class="text-white">Selected: <strong id="address-value">none</strong></p>
         </div>
 
-        <div class="current-weather border border-2 border-green-600 mt-5 rounded">
+        <div class="border border-2 border-green-600 mt-5 rounded">
           <div class="grid grid-cols-1 bg-green-600 py-3 border-b border-green-600">
-            <p class="font-extrabold text-2xl text-center">{{ location.city }}, {{ location.country}}</p>
+            <p class="font-extrabold text-xl text-center">{{ location.city }}, {{ location.country}}</p>
           </div>
           <div class="grid grid-cols-2">
             <div class="flex items-center">
@@ -31,7 +31,7 @@
             </div>
             <div class="text-center">
               <p><span class="font-semibold">Feels Like: </span> {{ currentWeather.feels_like }} °C</p>
-              <p>{{ currentWeather.description }}</p>
+              <p class="capitalize">{{ currentWeather.description }}</p>
             </div>
           </div>
           <div class="grid grid-cols-3 p-6 text-center mt-6 border-t">
@@ -84,8 +84,6 @@
         handler(newValue, oldvalue){
           this.fetchData()
         },
-
-
         deep: true
       }
     },
